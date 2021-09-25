@@ -1,0 +1,30 @@
+@font-face {
+	font-family: 'Lab Grotesque';
+	font-style: normal;
+  	font-weight: 300;
+	src: url(../fonts/LabGrotesque-Light.ttf), url(../fonts/LabGrotesque-Light.woff);
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Lab Grotesque';
+	font-style: normal;
+  	font-weight: 400;
+	src: url(../fonts/LabGrotesque-Regular.ttf), url(../fonts/LabGrotesque-Regular.woff);
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Lab Grotesque';
+	font-style: normal;
+  	font-weight: 500;
+	src: url(../fonts/LabGrotesque-Medium.ttf), url(../fonts/LabGrotesque-Medium.woff);
+	font-display: swap;
+}
+
+.fade-enter-active, .fade-leave-active {
+	transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+	opacity: 0;
+}

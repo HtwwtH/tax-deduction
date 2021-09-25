@@ -1,28 +1,44 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <transition name="fade">
+      <Form v-if="formVisible" @closeForm="closeForm" />
+    </transition>
+
+    <div class="container">
+      <div class="">
+        <button @click="openForm" class="btn btn--transparent">Налоговый вычет</button>
+      </div>
+
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapActions } from 'vuex';
+import Form from "./components/Form";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Form
+  },
+  data() {
+    return {
+      formVisible: false
+    }
+  },
+  methods: {
+    ...mapActions(['clearHistory']),
+    openForm() {
+      this.formVisible = true;
+    },
+    closeForm() {
+      this.clearHistory();
+      this.formVisible = false;
+    }
   }
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped lang="scss">
 </style>
