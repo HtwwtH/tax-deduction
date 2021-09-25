@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: 'tax- deduction /'
+  publicPath: '/tax-deduction/'
 }
