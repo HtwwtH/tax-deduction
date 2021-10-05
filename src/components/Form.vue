@@ -47,10 +47,10 @@ export default {
   },
   methods: {
     ...mapActions(['clearHistory', 'setSalary', 'showDeductions', 'countDeductions']),
-    countPayments() {
-      this.clearHistory();
-      this.setSalary(this.salary);
-      this.countDeductions(260000);
+    async countPayments() {
+      await this.clearHistory();
+      await this.setSalary(this.salary);
+      await this.countDeductions(260000);
       this.showDeductions();
     },
     closeForm() {
