@@ -2,15 +2,15 @@
   <div class="overlay">
     <form action="" class="form" v-click-outside="closeForm">
       <div class="form__inner">
-        <button class="close" @click="closeForm">
+        <button type="button" class="close" @click="closeForm">
           <img src="/icons/close.svg" alt="">
         </button>
         <div class="title">Налоговый вычет</div>
         <p class="description">Используйте налоговый вычет чтобы погасить ипотеку досрочно. Размер налогового вычета составляет не более 13% от своего официального годового дохода.</p>
         <div class="field">
           <div class="title">Ваша зарплата в месяц</div>
-          <input v-model="salary" type="text" placeholder="Введите данные" value="">
-          <button type="button" @click="countPayments" class="count">Рассчитать</button>
+          <input v-bind:class="{ errorField: errorField }" @input="validate" v-model="salary" type="number" placeholder="Введите данные" value="">
+          <button :disabled="errorField" type="button" @click="countPayments" class="count">Рассчитать</button>
 
           <div v-if="$store.getters.getDeductionsVisible" class="counted">
             <div class="title">Итого можете внести в качестве досрочных:</div>
@@ -20,8 +20,8 @@
 
         <div class="field button-field">
           <div class="title">Что уменьшаем?</div>
-          <button class="btn btn--xs btn--red">Платёж</button>
-          <button class="btn btn--xs btn--gray">Срок</button>
+          <button type="button" class="btn btn--xs btn--red">Платёж</button>
+          <button type="button" class="btn btn--xs btn--gray">Срок</button>
         </div>
       </div>
 
@@ -43,6 +43,7 @@ export default {
   data() {
     return {
       salary: '',
+      errorField: false,
     }
   },
   methods: {
@@ -52,6 +53,14 @@ export default {
       await this.setSalary(this.salary);
       await this.countDeductions(260000);
       this.showDeductions();
+    },
+    validate () {
+      if (this.salary < 0) {
+        this.errorField = true;
+      }
+      else {
+        this.errorField = false;
+      }
     },
     closeForm() {
       this.$emit('closeForm');
@@ -74,6 +83,9 @@ export default {
     justify-content: center;
     overflow-y: auto;
     background: $gradient;
+  }
+  button:disabled {
+    opacity: .5;
   }
   .form {
     position: absolute;
@@ -120,6 +132,11 @@ export default {
         &::placeholder {
           color: $mediumGray;
         }
+      }
+
+      .errorField {
+        border: 1px solid red;
+        color: red;
       }
 
       button.count {
