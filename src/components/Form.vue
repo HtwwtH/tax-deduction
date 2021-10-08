@@ -55,11 +55,11 @@ export default {
       this.showDeductions();
     },
     validate () {
-      if (this.salary < 0) {
-        this.errorField = true;
+      if (parseInt(this.salary) && this.salary>0) {
+        this.errorField = false;
       }
       else {
-        this.errorField = false;
+        this.errorField = true;
       }
     },
     closeForm() {
@@ -85,6 +85,7 @@ export default {
     background: $gradient;
   }
   button:disabled {
+    cursor: pointer;
     opacity: .5;
   }
   .form {
